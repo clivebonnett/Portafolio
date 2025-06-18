@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abogados y Consultores Financiero S.A.S</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700&display=swap" rel="stylesheet">
+      <style>
+        body {
+            font-family: 'Montserrat', Arial, sans-serif;
+            background: linear-gradient(135deg, #e0e7ef 0%, #f7fafc 100%);
+            margin: 0;
+            padding: 0;
+            color: #222;
+        }
+        .navbar {
+            width: 100vw;
+            background: rgba(1,34,66,0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0.5em 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(1,34,66,0.08);
+        }
+        .navbar-nav {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .navbar-nav button {
+            padding: 12px 28px;
+            background: #0ecf6f;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 25px;
+            font-size: 1.15em;
+            font-weight: bold;
+            transition: background 0.2s, transform 0.2s;
+            box-shadow: 0 2px 6px rgba(1,34,66,0.08);
+        }
+        .navbar-nav button:hover,
+        .navbar-nav button.active {
+            background: #012242;
+            transform: scale(1.05);
+        }
+
+        /* HERO LOGO SECTION - CORREGIDO PARA FONDO COMPLETO */
+        .hero-logo-section {
+            width: 100vw;
+            min-height: 500px;
+            height: 70vh;
+            max-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            margin-top: 0;
+            padding: 0;
+            position: relative;
+            background: #012242;
+        }
+        .hero-logo-bg-img {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100vw;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            z-index: 1;
+            min-height: 500px;
+            filter: brightness(0.55) blur(0px);
+        }
+        .hero-logo-overlay {
+            width: 100vw;
+            max-width: 100vw;
+            color: #fff;
+            text-align: center;
+            z-index: 2;
+            padding: 0 20px;
+            background: none;
+            position: absolute;
+            top: 0; left: 0; height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .hero-logo-title {
+            color: #fff;
+            margin: 0;
+            font-size: 3.2em;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 12px #01224288;
+        }
+        .hero-logo-sub {
+            font-size: 1.6em;
+            margin: 18px 0 0 0;
+            font-weight: 500;
+            text-shadow: 0 2px 8px #01224255;
+        }
+        .hero-logo-overlay h2 {
+            font-size: 2.2em;
+            margin: 40px 0 18px 0;
+            color: #fff;
+            font-weight: 700;
+            text-shadow: 0 2px 8px #01224255;
+        }
+        .hero-logo-overlay p {
+            font-size: 1.25em;
+            max-width: 700px;
+            margin: 0 auto;
+            font-weight: 400;
+            text-shadow: 0 2px 8px #01224299;
+        }
+        @media (max-width: 700px) {
+            .hero-logo-title { font-size: 1.3em; }
+            .hero-logo-section { height: 50vh; min-height: 200px; }
+            .hero-logo-bg-img { min-height: 200px; }
+            .hero-logo-overlay { padding: 0 5px; }
+        }
+        @media (max-width: 500px) {
+            .hero-logo-title { font-size: 1em; }
+            .hero-logo-section { min-height: 120px; }
+            .hero-logo-bg-img { min-height: 120px; }
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 0 auto 80px auto;
+            padding: 0 20px;
+            margin-top: 80px;
+        }
+        section {
+            display: none;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(1,34,66,0.07);
+            padding: 40px 32px;
+            margin-bottom: 30px;
+            animation: fadeIn 0.6s;
+        }
+        section.active {
+            display: block;
+        }
+        #inicio {
+            background: none;
+            box-shadow: none;
+            padding: 0;
+            margin-bottom: 0;
+        }
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            color: #012242;
+            text-align: center;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        .creditos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 24px;
+            margin-bottom: 30px;
+        }
+        .credito-card {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(1,34,66,0.10);
+            background: #f7f7f7;
+            transition: transform 0.2s;
+        }
+        .credito-card:hover {
+            transform: translateY(-6px) scale(1.03);
+        }
+        .credito-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+        }
+        .texto-superpuesto {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: rgba(1,34,66,0.82);
+            color: #fff;
+            padding: 14px 8px;
+            text-align: center;
+            font-size: 1.15em;
+            font-weight: bold;
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+        }
+        .whatsapp-link {
+            display: inline-block;
+            margin: 20px 10px 0 0;
+            text-align: center;
+            text-decoration: none;
+            color: white;
+            background-color: #25D366;
+            padding: 14px 32px;
+            border-radius: 25px;
+            font-size: 1.15em;
+            font-weight: bold;
+            transition: background 0.2s, transform 0.2s;
+        }
+        .whatsapp-link:hover {
+            background-color: #1da851;
+            transform: scale(1.05);
+        }
+        .contact-info {
+            font-size: 1.15em;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .contact-info a {
+            color: #0ecf6f;
+            text-decoration: none;
+        }
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+        /* Productos */
+        .productos-img-container {
+            position: relative;
+            width: 100%;
+            max-width: 100vw;
+            margin: 0 auto 24px auto;
+            /* Cambia el aspect-ratio para hacer la imagen más alta */
+            aspect-ratio: 16/11;
+            min-height: 480px;
+            display: flex;
+            align-items: stretch;
+            justify-content: center;
+            overflow: hidden;
+            border-radius: 0;
+            background: #012242;
+        }
+        .productos-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+            position: absolute;
+            top: 0; left: 0;
+            z-index: 1;
+        }
+        .productos-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(1,34,66,0.60);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-align: center;
+            padding: 40px 20px;
+            box-sizing: border-box;
+            z-index: 2;
+            overflow-y: auto;
+        }
+        .productos-title {
+            margin-bottom: 18px;
+            font-size: 2.5em;
+            font-weight: 700;
+            text-shadow: 0 2px 8px rgba(1,34,66,0.25);
+            color: #fff !important;
+        }
+        .productos-list {
+            list-style-position: inside;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+            font-size: 1.35em;
+            line-height: 1.6;
+            padding: 0;
+            background: rgba(1,34,66,0.10);
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(1,34,66,0.10);
+        }
+        .productos-list li {
+            margin: 18px 0;
+        }
+        footer {
+            background: #012242;
+            color: #fff;
+            text-align: center;
+            padding: 18px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            font-size: 1em;
+            letter-spacing: 1px;
+            z-index: 200;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+        @media (max-width: 900px) {
+            .productos-title { font-size: 1.5em; }
+            .productos-list { font-size: 1.1em; }
+            .productos-img-container { aspect-ratio: 16/14; min-height: 350px; }
+        }
+        @media (max-width: 700px) {
+            main { padding: 0 5px; margin-top: 60px;}
+            section { padding: 18px 5px; }
+            .creditos-grid { grid-template-columns: 1fr; }
+            .hero-logo-title { font-size: 1.3em; }
+            .hero-logo-section { height: 50vh; min-height: 200px; }
+            .hero-logo-bg-img { min-height: 200px; }
+            .hero-logo-overlay { padding: 0 5px; }
+            .productos-img-container { aspect-ratio: 16/18; min-height: 250px; }
+        }
+        @media (max-width: 600px) {
+            .productos-img-container {
+                aspect-ratio: 16/22;
+                min-height: 180px;
+            }
+            .productos-overlay {
+                padding: 18px 5px;
+            }
+            .productos-title { font-size: 1.1em; }
+            .productos-list { font-size: 1em; }
+        }
+
+        /* Créditos verticales lado a lado y más largos */
+        .creditos-vertical {
+            display: flex;
+            flex-direction: row;
+            gap: 32px;
+            width: 100%;
+            align-items: flex-start;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .credito-card-vertical {
+            position: relative;
+            width: 220px;
+            height: 370px;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(1,34,66,0.13);
+            background: #f7f7f7;
+            display: flex;
+            align-items: stretch;
+            margin: 0;
+            transition: transform 0.2s;
+            flex-shrink: 0;
+        }
+        .credito-card-vertical img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: center;
+            display: block;
+            background: #fff;
+        }
+        .texto-superpuesto-vertical {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: rgba(1,34,66,0.82);
+            color: #fff;
+            padding: 22px 12px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            border-bottom-left-radius: 18px;
+            border-bottom-right-radius: 18px;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 8px #01224288;
+        }
+        @media (max-width: 950px) {
+            .creditos-vertical {
+                gap: 16px;
+            }
+            .credito-card-vertical {
+                width: 160px;
+                height: 270px;
+            }
+        }
+        @media (max-width: 700px) {
+            .creditos-vertical {
+                flex-direction: column;
+                align-items: center;
+            }
+            .credito-card-vertical {
+                width: 90vw;
+                max-width: 350px;
+                height: 350px;
+            }
+        }
+        @media (max-width: 600px) {
+            .credito-card-vertical {
+                height: 250px;
+            }
+            .texto-superpuesto-vertical {
+                font-size: 1em;
+                padding: 10px 4px;
+                border-bottom-left-radius: 10px;
+                border-bottom-right-radius: 10px;
+            }
+            .creditos-vertical {
+                gap: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="navbar-nav">
+            <button id="btn-inicio" class="active" onclick="mostrarSeccion('inicio')">Inicio</button>
+            <button id="btn-solicita-credito" onclick="mostrarSeccion('solicita-credito')">Solicita tu Crédito</button>
+            <button id="btn-nuestros-productos" onclick="mostrarSeccion('nuestros-productos')">Nuestros Productos</button>
+            <button id="btn-contactanos" onclick="mostrarSeccion('contactanos')">Contáctanos</button>
+            <button id="btn-pago" onclick="mostrarSeccion('pago')">Realiza tu Pago Aquí</button>
+        </div>
+    </nav>
+
+    <main>
+        <!-- HERO LOGO SECTION corregido -->
+        <section id="inicio" class="active">
+            <div class="hero-logo-section">
+                <img src="Inicio_Arriba.jpg" alt="Fondo empresa" class="hero-logo-bg-img">
+                <div class="hero-logo-overlay">
+                    <h1 class="hero-logo-title">Abogados y Consultores Financiero S.A.S</h1>
+                    <p class="hero-logo-sub">Soluciones legales y financieras para tu futuro</p>
+                    <h2>¿Quiénes Somos?</h2>
+                    <p>
+                        Somos una empresa de asesoría para la obtención de servicios financieros comprometida con el éxito de nuestros clientes. Nos apasiona brindar soluciones financieras innovadoras y personalizadas que les permitan alcanzar sus metas. Nos esforzamos por construir relaciones duraderas basadas en la confianza, la integridad y el servicio excepcional.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="solicita-credito">
+            <h3>Solicita Aquí Tu Crédito</h3>
+            <div class="creditos-vertical">
+                <div class="credito-card-vertical">
+                    <img src="Pensionado_nueva.jpg" alt="Pensionado">
+                    <div class="texto-superpuesto-vertical">Se acepta todo tipo de pensionado</div>
+                </div>
+                <div class="credito-card-vertical">
+                    <img src="Docente_nueva.jpg" alt="Maestro">
+                    <div class="texto-superpuesto-vertical">Docente y Administrativos del Estado</div>
+                </div>
+                <div class="credito-card-vertical">
+                    <img src="Policia_nueva.jpg" alt="Policía Nacional">
+                    <div class="texto-superpuesto-vertical">Patrulleros, Suboficiales y Oficiales</div>
+                </div>
+                <div class="credito-card-vertical">
+                    <img src="Militar_nueva.jpg" alt="Militar">
+                    <div class="texto-superpuesto-vertical">Ejército, Fuerza Aérea, Armada Nacional</div>
+                </div>
+            </div>
+            <p style="text-align:center; margin-top: 30px;">
+                <a class="whatsapp-link" href="https://loquenecesito.co/store?referrerCode=dv66591&isCreditOnly=ok" target="_blank">Solicitar crédito en línea</a>
+                <a class="whatsapp-link" href="https://loquenecesito.co/store?referrerCode=dv66591&isCreditOnly=ok" target="_blank" style="background:#012242;">Solicitar crédito hipotecario</a>
+                <a class="whatsapp-link" href="https://loquenecesito.co/store?referrerCode=dv66591&isCreditOnly=ok" target="_blank" style="background:#012242;">Solicita tu Tarjeta de Credito</a>
+            </p>
+        </section>
+
+        <section id="nuestros-productos">
+            <div class="productos-img-container">
+                <img src="nuestros_productos.jpg" alt="Nuestros productos" class="productos-img">
+                <div class="productos-overlay">
+                    <h3 class="productos-title">Nuestros Productos</h3>
+                    <ul class="productos-list">
+                        <li>Consulta en las centrales de riesgo: Datacrédito y CIFIN.</li>
+                        <li>Eliminar reportes de manera legal en las centrales de riesgo.</li>
+                        <li>Créditos para los siguientes perfiles: asalariados, independientes y pensionados.</li>
+                        <li>Modalidades de créditos: hipotecarios, libre inversión, libranza, vehículos, PYMES, entre otros.</li>
+                        <li>Tarjeta de Créditos, Créditos libre inversión con garantía hipotecaria y para personas reportadas, entre otros.</li>
+                        <li>Elaboración de documentos contables, RUT, declaración de renta, IVA, balances y estados financieros.</li>
+                        <li>Trámites legales: derecho de petición, tutela, procesos judiciales, entre otros.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="contactanos">
+            <div style="position:relative; width:100%; max-width:500px; margin:0 auto 24px auto;">
+                <img src="contacto.jpg" alt="Contáctanos" style="width:100%;border-radius:12px;display:block;">
+                <div style="
+                    position:absolute;
+                    top:0; left:0; width:100%; height:100%;
+                    display:flex; flex-direction:column; justify-content:center; align-items:center;
+                    background:rgba(116, 121, 126, 0.45);
+                    color:#fff;
+                    border-radius:12px;
+                    padding:30px 15px;
+                    box-sizing:border-box;
+                    text-align:center;
+                ">
+                    <h2 style="margin-bottom:12px;">Contáctanos</h2>
+                    <div class="contact-info" style="color:#f5efef;">
+                        <p><strong>Email:</strong> <a href="mailto:abogadosasociados67@gmail.com" style="color:#e7eeea;">abogadosasociados67@gmail.com</a></p>
+                        <p><strong>Teléfono:</strong> <a href="tel:3023350724" style="color:#e2e7e4;">302-3350724</a></p>
+                        <p><strong>Sitio web:</strong> <a href="http://www.abogadosyConsultoresFinanciero.com" target="_blank" style="color:#dce6e1;">www.abogadosyConsultoresFinanciero.com</a></p>
+                    </div>
+                    <a class="whatsapp-link" href="https://wa.me/573023350724" target="_blank" style="margin-top:10px;">Contáctanos por WhatsApp</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="pago">
+            <img src="https://images.unsplash.com/photo-1515168833906-d2a3b82b302b?auto=format&fit=crop&w=900&q=80" alt="Pago en línea" style="width:100%;max-width:500px;border-radius:12px;margin:0 auto 24px auto;display:block;">
+            <h3>Realiza tu Pago</h3>
+            <p style="text-align:center;">Selecciona tu método de pago:</p>
+            <div style="display:flex; justify-content:center; gap:30px; flex-wrap:wrap; margin-top:20px;">
+                <a href="https://www.pse.com.co/" target="_blank" style="display:inline-block;">
+                    <img src="Pago_pse.jpg" alt="Pagar con PSE" style="height:60px; width:auto; display:block; margin:0 auto 8px auto;">
+                    <button style="display:block; width:100%; background:#0033a0; color:#fff; border:none; border-radius:8px; padding:10px 24px; font-size:1em; cursor:pointer;">Pagar con PSE</button>
+                </a>
+                <a href="https://www.nequi.com.co/" target="_blank" style="display:inline-block;">
+                    <img src="Pago_nequi.png" alt="Pagar con Nequi" style="height:60px; width:auto; display:block; margin:0 auto 8px auto;">
+                    <button style="display:block; width:100%; background:#ff5a00; color:#fff; border:none; border-radius:8px; padding:10px 24px; font-size:1em; cursor:pointer;">Pagar con Nequi</button>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        &copy; 2025 Abogados y Consultores Financiero S.A.S. Todos los derechos reservados.
+    </footer>
+
+    <script>
+        // Mostrar la sección de inicio por defecto
+        document.addEventListener('DOMContentLoaded', function() {
+            mostrarSeccion('inicio');
+        });
+
+        function mostrarSeccion(id) {
+            // Cambia la sección visible
+            document.querySelectorAll('main section').forEach(seccion => {
+                seccion.classList.remove('active');
+            });
+            document.getElementById(id).classList.add('active');
+
+            // Cambia el estado activo en los botones
+            document.querySelectorAll('.navbar-nav button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            const btnId = 'btn-' + id;
+            const btn = document.getElementById(btnId);
+            if (btn) btn.classList.add('active');
+        }
+    </script>
+</body>
+</html>
